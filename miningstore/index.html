@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MiningStore — Case Study | Patricia González</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0A0A0A;
+    --dark: #111111;
+    --card: #161616;
+    --border: #222222;
+    --gold: #F5A623;
+    --gold-dim: rgba(245,166,35,0.15);
+    --white: #F0EDE8;
+    --mid: #888880;
+    --light: #333330;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+  }
+
+  .nav-back {
+    font-size: 0.75rem;
+    color: var(--mid);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-back:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    overflow: hidden;
+    padding-top: 80px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://miningstore.com/wp-content/uploads/2025/07/Miningstore-Iowa-Hydro-Mining-Facility.webp');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.25);
+    z-index: 0;
+  }
+
+  .hero-grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(245,166,35,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(245,166,35,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 4rem 6rem 5rem;
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .hero-tag::before {
+    content: '▸';
+    font-size: 0.6rem;
+  }
+
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.0;
+    margin-bottom: 2rem;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-title .accent { color: var(--gold); }
+
+  .hero-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 3rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    color: rgba(240,237,232,0.6);
+    max-width: 480px;
+    line-height: 1.8;
+  }
+
+  .hero-metrics {
+    display: flex;
+    gap: 3rem;
+  }
+
+  .metric-item { text-align: right; }
+
+  .metric-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .metric-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  /* SECTION BASE */
+  section { padding: 6rem; }
+
+  .section-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .section-tag::before { content: '▸'; font-size: 0.55rem; }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 600;
+    line-height: 1.15;
+    margin-bottom: 3rem;
+    letter-spacing: -0.01em;
+  }
+
+  /* CONTEXT */
+  .context {
+    background: var(--dark);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .context-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .context-text {
+    font-size: 1rem;
+    color: rgba(240,237,232,0.65);
+    line-height: 1.9;
+  }
+
+  .context-text p { margin-bottom: 1.5rem; }
+
+  .context-cards {}
+
+  .ctx-card {
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    background: var(--card);
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+  }
+
+  .ctx-card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding-top: 0.2rem;
+    min-width: 80px;
+  }
+
+  .ctx-card-value {
+    font-size: 0.9rem;
+    color: var(--white);
+    line-height: 1.6;
+  }
+
+  /* PROBLEM */
+  .problem {}
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .problem-text {
+    font-size: 1rem;
+    color: rgba(240,237,232,0.65);
+    line-height: 1.9;
+  }
+
+  .problem-text p { margin-bottom: 1.5rem; }
+
+  .problem-list { list-style: none; }
+
+  .problem-list li {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+    color: rgba(240,237,232,0.7);
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    line-height: 1.6;
+  }
+
+  .problem-list li::before {
+    content: '×';
+    color: var(--gold);
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  /* STRATEGY */
+  .strategy {
+    background: var(--dark);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .strategy-intro {
+    font-size: 1.1rem;
+    color: rgba(240,237,232,0.65);
+    max-width: 700px;
+    line-height: 1.9;
+    margin-bottom: 4rem;
+  }
+
+  .strategy-blocks {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .strategy-block {
+    background: var(--card);
+    padding: 2.5rem;
+  }
+
+  .block-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 1.2rem;
+  }
+
+  .block-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  .block-text {
+    font-size: 0.85rem;
+    color: var(--mid);
+    line-height: 1.8;
+  }
+
+  /* NURTURE */
+  .nurture {}
+
+  .nurture-intro {
+    font-size: 1rem;
+    color: rgba(240,237,232,0.65);
+    max-width: 680px;
+    line-height: 1.9;
+    margin-bottom: 4rem;
+  }
+
+  .nurture-layers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .layer-card {
+    border: 1px solid var(--border);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .layer-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gold);
+  }
+
+  .layer-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+  }
+
+  .layer-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    line-height: 1.3;
+  }
+
+  .layer-trigger {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+    background: var(--gold-dim);
+    padding: 0.3rem 0.7rem;
+    display: inline-block;
+    margin-bottom: 1rem;
+    letter-spacing: 0.06em;
+  }
+
+  .layer-text {
+    font-size: 0.85rem;
+    color: var(--mid);
+    line-height: 1.8;
+  }
+
+  /* IMAGE BREAK */
+  .image-break {
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    height: 500px;
+  }
+
+  .image-break img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(0.6);
+  }
+
+  .image-break-text {
+    position: absolute;
+    bottom: 3rem;
+    left: 6rem;
+    right: 6rem;
+  }
+
+  .image-break-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+  }
+
+  .image-break-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 600;
+    max-width: 600px;
+    line-height: 1.2;
+  }
+
+  /* SEGMENTS */
+  .segments {
+    background: var(--dark);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .segments-intro {
+    font-size: 1rem;
+    color: rgba(240,237,232,0.65);
+    max-width: 680px;
+    line-height: 1.9;
+    margin-bottom: 4rem;
+  }
+
+  .segments-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .segments-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: left;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--card);
+  }
+
+  .segments-table td {
+    padding: 1.2rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+    color: rgba(240,237,232,0.75);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  .segments-table tr:hover td { background: rgba(245,166,35,0.03); }
+
+  .seg-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  /* GEO */
+  .geo {}
+
+  .geo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .geo-text {
+    font-size: 1rem;
+    color: rgba(240,237,232,0.65);
+    line-height: 1.9;
+  }
+
+  .geo-text p { margin-bottom: 1.5rem; }
+
+  .geo-stat {
+    border: 1px solid var(--border);
+    padding: 3rem;
+    background: var(--card);
+    text-align: center;
+  }
+
+  .geo-stat-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .geo-stat-label {
+    font-size: 1rem;
+    color: var(--white);
+    margin-bottom: 0.8rem;
+    font-family: 'Syne', sans-serif;
+    font-weight: 500;
+  }
+
+  .geo-stat-sub {
+    font-size: 0.85rem;
+    color: var(--mid);
+    line-height: 1.7;
+  }
+
+  /* RESULTS */
+  .results {
+    background: var(--dark);
+    border-top: 1px solid var(--border);
+  }
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    margin-bottom: 4rem;
+  }
+
+  .result-card {
+    background: var(--card);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .result-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.8rem;
+  }
+
+  .result-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid);
+    line-height: 1.6;
+  }
+
+  .results-note {
+    border-top: 1px solid var(--border);
+    padding-top: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+
+  .note-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--white);
+  }
+
+  .note-text {
+    font-size: 0.9rem;
+    color: var(--mid);
+    line-height: 1.8;
+  }
+
+  /* LEARNINGS */
+  .learnings {}
+
+  .learnings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .learning {
+    border: 1px solid var(--border);
+    padding: 2.5rem;
+    background: var(--card);
+  }
+
+  .learning-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .learning-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    line-height: 1.3;
+  }
+
+  .learning-text {
+    font-size: 0.85rem;
+    color: var(--mid);
+    line-height: 1.8;
+  }
+
+  /* STACK */
+  .stack {
+    background: var(--dark);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    border: 1px solid var(--border);
+    padding: 0.5rem 1rem;
+    color: var(--mid);
+    background: var(--card);
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .pill:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    border-top: 1px solid var(--border);
+    padding: 4rem 6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+
+  .footer-role {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .footer-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-link:hover { color: var(--gold); }
+
+  /* ANIMATIONS */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    section { padding: 4rem 2rem; }
+    nav { padding: 1rem 1.5rem; }
+    .hero-content { padding: 3rem 2rem 4rem; }
+    .hero-bottom { flex-direction: column; gap: 2rem; align-items: flex-start; }
+    .hero-metrics { flex-direction: row; }
+    .context-grid, .problem-grid, .geo-grid, .results-note { grid-template-columns: 1fr; gap: 3rem; }
+    .strategy-blocks, .nurture-layers { grid-template-columns: 1fr; }
+    .results-grid { grid-template-columns: 1fr 1fr; }
+    .learnings-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 2rem; text-align: center; }
+    .image-break-text { left: 2rem; right: 2rem; }
+    .segments-table { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Patricia González</a>
+  <a href="../index.html" class="nav-back">← All Projects</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-overlay"></div>
+  <div class="hero-content fade-in">
+    <div class="hero-tag">Case Study · B2B Growth · Crypto</div>
+    <h1 class="hero-title">Repositioning Bitcoin Mining<br>for <span class="accent">Institutional Investors</span></h1>
+    <div class="hero-bottom">
+      <p class="hero-sub">Complete ICP repositioning, full-funnel rebuild, and pioneering GEO strategy — turning a crypto enthusiast brand into an institutional investor platform over 12 months.</p>
+      <div class="hero-metrics">
+        <div class="metric-item">
+          <div class="metric-value">3.4×</div>
+          <div class="metric-label">Qualified Calls</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-value">9.0%</div>
+          <div class="metric-label">Email Open Rate</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-value">~10×</div>
+          <div class="metric-label">LinkedIn Organic</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTEXT -->
+<section class="context">
+  <div class="context-grid fade-in">
+    <div>
+      <div class="section-tag">Context</div>
+      <h2 class="section-title">A Strong Product.<br>The Wrong Audience.</h2>
+      <div class="context-text">
+        <p>MiningStore is a U.S.-based Bitcoin mining company with $15M+ in revenue, 9+ years of operational history, and institutional-grade infrastructure across 11 sites in Iowa. Their offering — managed mining, hosting, and hardware — was genuinely differentiated.</p>
+        <p>The problem: their entire digital presence was built for crypto enthusiasts. The messaging spoke hashrate and block rewards. The content assumed technical knowledge. And the core retail audience was saturating.</p>
+        <p>Meanwhile, a new buyer was emerging: high-net-worth individuals, family offices, and private equity firms looking for asset-backed Bitcoin exposure with tax advantages. No one was speaking their language.</p>
+      </div>
+    </div>
+    <div class="context-cards">
+      <div class="ctx-card">
+        <div class="ctx-card-label">Client</div>
+        <div class="ctx-card-value">MiningStore — U.S. Bitcoin Mining ($15M+ Revenue)</div>
+      </div>
+      <div class="ctx-card">
+        <div class="ctx-card-label">Market</div>
+        <div class="ctx-card-value">United States — Institutional & HNWI Investors</div>
+      </div>
+      <div class="ctx-card">
+        <div class="ctx-card-label">Duration</div>
+        <div class="ctx-card-value">12 Months (Dec 2024 – Jan 2026)</div>
+      </div>
+      <div class="ctx-card">
+        <div class="ctx-card-label">Role</div>
+        <div class="ctx-card-value">Solo Growth Marketing — Strategy & Full Execution</div>
+      </div>
+      <div class="ctx-card">
+        <div class="ctx-card-label">Channels</div>
+        <div class="ctx-card-value">SEO · GEO · LinkedIn · Email · Lead Magnets · CRM</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="section-tag fade-in">The Problem</div>
+  <h2 class="section-title fade-in">Six Gaps in the Growth Engine</h2>
+  <div class="problem-grid fade-in">
+    <div class="problem-text">
+      <p>The audit revealed a site optimized for the wrong person. Technical jargon, retail-focused CTAs, and content that assumed crypto literacy — none of which resonated with a family office evaluating portfolio diversification or a tax consultant researching bonus depreciation.</p>
+      <p>There was no lead nurturing, no segmentation, and no system to move a prospect from first touch to booked call. Every lead went cold between discovery and sale.</p>
+    </div>
+    <ul class="problem-list">
+      <li>Messaging built for crypto enthusiasts, not institutional investors</li>
+      <li>Core retail audience saturating — lower conversion potential</li>
+      <li>No lead nurturing — prospects went cold between touch and call</li>
+      <li>No ICP segmentation — one message for all audiences</li>
+      <li>LinkedIn inconsistent — no content calendar, no paid strategy</li>
+      <li>Zero GEO presence — no LLM-driven traffic at all</li>
+    </ul>
+  </div>
+</section>
+
+<!-- STRATEGY -->
+<section class="strategy">
+  <div class="section-tag fade-in">The Strategy</div>
+  <h2 class="section-title fade-in">Reposition. Rebuild. Capture.</h2>
+  <p class="strategy-intro fade-in">Three strategic priorities drove everything: reposition the brand for institutional audiences, rebuild the full-funnel infrastructure, and capture a new traffic channel before competitors discovered it.</p>
+  <div class="strategy-blocks fade-in">
+    <div class="strategy-block">
+      <div class="block-num">01 — REPOSITION</div>
+      <div class="block-title">Investor Language Over Crypto Language</div>
+      <div class="block-text">Every piece of content was rewritten to speak ROI, yield, diversification, and tax efficiency. Not hashrate, block rewards, or mining difficulty. The audience was financial, not technical. We rebuilt the website, blog, and all messaging around five distinct investor segments.</div>
+    </div>
+    <div class="strategy-block">
+      <div class="block-num">02 — REBUILD</div>
+      <div class="block-title">Full-Funnel Infrastructure From Zero</div>
+      <div class="block-text">Complete SEO architecture rebuild. Three-layer lifecycle email system in Zoho Campaigns. Lead magnets per segment with dedicated landing pages. LinkedIn organic calendar plus geo-targeted paid campaigns. Automated lead scraping and enrichment for the sales team.</div>
+    </div>
+    <div class="strategy-block">
+      <div class="block-num">03 — CAPTURE</div>
+      <div class="block-title">Pioneer GEO Before the Competition</div>
+      <div class="block-text">Before GEO was an established term, structured all content to answer the questions HNWIs were asking AI tools. FAQs, detailed guides, investor-specific content — optimized to be cited by ChatGPT, Perplexity, and Google AI Overviews. Zero-competition, high-intent channel.</div>
+    </div>
+  </div>
+</section>
+
+<!-- IMAGE BREAK -->
+<div class="image-break">
+  <img src="https://miningstore.com/wp-content/uploads/2025/07/Miningstore-Iowa-Mining-Facility-1-1024x512.webp" alt="MiningStore Iowa Facility">
+  <div class="image-break-text">
+    <div class="image-break-label">Infrastructure</div>
+    <div class="image-break-title">Institutional-grade Bitcoin mining. The marketing finally matched the product.</div>
+  </div>
+</div>
+
+<!-- NURTURE -->
+<section class="nurture">
+  <div class="section-tag fade-in">Email Architecture</div>
+  <h2 class="section-title fade-in">Three Layers. One System.<br>Right Message at Every Stage.</h2>
+  <p class="nurture-intro fade-in">Rather than a single generic nurture flow, built three distinct automated systems — each serving a different funnel stage, each triggered by a different signal. The result: the right content reached the right prospect at the right moment, automatically.</p>
+  <div class="nurture-layers fade-in">
+    <div class="layer-card">
+      <div class="layer-num">Layer 01</div>
+      <div class="layer-title">Intent-Triggered Nurture</div>
+      <div class="layer-trigger">Trigger: Book a Call Click</div>
+      <div class="layer-text">Activated automatically when a prospect clicked "Book a Call" anywhere on the site. Educational sequence delivered before the sales call — reducing friction and improving call quality. Prospects arrived informed and pre-qualified.</div>
+    </div>
+    <div class="layer-card">
+      <div class="layer-num">Layer 02</div>
+      <div class="layer-title">Post-Call Segmented Nurture</div>
+      <div class="layer-trigger">Trigger: Sales Rep CRM Tag</div>
+      <div class="layer-text">Activated by the sales rep after tagging each lead by segment in Zoho CRM. Different sequences for family offices vs tax consultants vs real estate investors — each addressing their specific objections and motivations.</div>
+    </div>
+    <div class="layer-card">
+      <div class="layer-num">Layer 03</div>
+      <div class="layer-title">Weekly Broadcast</div>
+      <div class="layer-trigger">Trigger: Every Week</div>
+      <div class="layer-text">Weekly email to the full database combining awareness content — blog highlights, market insights, mining education — with a consistent CTA to book a call. Kept the brand top-of-mind across the full funnel, always-on.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SEGMENTS -->
+<section class="segments">
+  <div class="section-tag fade-in">ICP Segmentation</div>
+  <h2 class="section-title fade-in">Five Segments. Five Strategies.</h2>
+  <p class="segments-intro fade-in">Different investors arrive at Bitcoin mining with completely different motivations, objections, and content needs. Generic messaging loses all of them. Segment-specific content converts each one.</p>
+  <table class="segments-table fade-in">
+    <thead>
+      <tr>
+        <th>Segment</th>
+        <th>Primary Motivation</th>
+        <th>Key Objection</th>
+        <th>Content Angle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="seg-name">Venture Capital</span></td>
+        <td>Portfolio diversification</td>
+        <td>Liquidity & exit timeline</td>
+        <td>ROI models, exit scenarios</td>
+      </tr>
+      <tr>
+        <td><span class="seg-name">Family Offices</span></td>
+        <td>Inflation hedge</td>
+        <td>Operational complexity</td>
+        <td>Turnkey service, white-glove ops</td>
+      </tr>
+      <tr>
+        <td><span class="seg-name">Real Estate Investors</span></td>
+        <td>Yield comparison</td>
+        <td>Energy costs & ROI</td>
+        <td>Cap rate comparison, yield analysis</td>
+      </tr>
+      <tr>
+        <td><span class="seg-name">Tech Professionals</span></td>
+        <td>Ideological alignment</td>
+        <td>Tax implications</td>
+        <td>Network sovereignty, tech specs</td>
+      </tr>
+      <tr>
+        <td><span class="seg-name">Tax Consultants</span></td>
+        <td>Client advisory</td>
+        <td>Regulatory uncertainty</td>
+        <td>Bonus depreciation guide, tax ROI</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- GEO -->
+<section class="geo">
+  <div class="section-tag fade-in">GEO — Generative Engine Optimization</div>
+  <h2 class="section-title fade-in">A New Channel Before<br>Anyone Had a Name for It</h2>
+  <div class="geo-grid fade-in">
+    <div class="geo-text">
+      <p>While reviewing analytics, a new traffic source appeared: ChatGPT. Small in volume, but the quality was unlike anything else — institutional investors, family offices, tax consultants. The highest-intent visitors we'd seen.</p>
+      <p>The insight: LLMs cite content that answers specific questions, not content that ranks for keywords. So every blog post was restructured around the exact questions a HNWI investor would ask an AI tool. FAQs integrated into every page. Investor-specific guides built to be cited, not just read.</p>
+      <p>One lead told the sales team: "When I searched in Grok, MiningStore kept coming up. I checked the website and LinkedIn — the presence looked solid, so I booked a call."</p>
+      <p>That lead didn't come from an ad or SEO. It came from an AI referral — a channel with zero competition and maximum intent.</p>
+    </div>
+    <div class="geo-stat">
+      <div class="geo-stat-value">2%</div>
+      <div class="geo-stat-label">LLM-Driven Traffic</div>
+      <div class="geo-stat-sub">Grew from zero to 2% of total users over 12 months — consistently the highest quality lead channel, with the shortest path to booked calls.</div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section class="results">
+  <div class="section-tag fade-in">Results</div>
+  <h2 class="section-title fade-in">12 Months. One Solo Operator.</h2>
+  <div class="results-grid fade-in">
+    <div class="result-card">
+      <div class="result-value">3.4×</div>
+      <div class="result-label">Growth in Qualified<br>Investor Calls</div>
+    </div>
+    <div class="result-card">
+      <div class="result-value">4.7→9%</div>
+      <div class="result-label">Email Open Rate<br>Over 12 Months</div>
+    </div>
+    <div class="result-card">
+      <div class="result-value">~10×</div>
+      <div class="result-label">LinkedIn Organic<br>Impressions Growth</div>
+    </div>
+    <div class="result-card">
+      <div class="result-value">2%</div>
+      <div class="result-label">LLM Traffic Share<br>Highest Quality Leads</div>
+    </div>
+  </div>
+  <div class="results-note fade-in">
+    <div>
+      <div class="note-title">What drove the call growth</div>
+      <div class="note-text">The 3.4x growth in qualified investor calls came from three converging factors: a clearer ICP that attracted the right visitors, a three-layer nurture system that pre-educated prospects before the call, and LinkedIn campaigns that put the sales team's face in front of the exact audience they needed to reach.</div>
+    </div>
+    <div>
+      <div class="note-title">Scope of execution</div>
+      <div class="note-text">All strategy, content, campaigns, SEO architecture, email workflows, lead magnets, CRM configuration, LinkedIn organic and paid, lead scraping automation, and sales enablement — designed and implemented directly as a solo growth engagement. No agency, no team.</div>
+    </div>
+  </div>
+</section>
+
+<!-- LEARNINGS -->
+<section class="learnings">
+  <div class="section-tag fade-in">Key Decisions</div>
+  <h2 class="section-title fade-in">What Would I Do Differently</h2>
+  <div class="learnings-grid fade-in">
+    <div class="learning">
+      <div class="learning-tag">Improvement 01</div>
+      <div class="learning-title">Segment from the Landing Page, Not the Sales Call</div>
+      <div class="learning-text">The post-call nurture was triggered by the sales rep tagging the lead in Zoho after the call. More powerful: capture segment signals at the first landing page touch and start personalized nurture immediately — before any human interaction. This is now implemented for other clients using HubSpot.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-tag">Improvement 02</div>
+      <div class="learning-title">HubSpot Over Zoho for Attribution</div>
+      <div class="learning-text">Zoho's attribution reporting made it difficult to tie specific content pieces to booked calls. HubSpot's multi-touch attribution would have made optimization decisions faster and more precise — knowing exactly which blog post or email sequence drove which investor to book.</div>
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section class="stack">
+  <div class="section-tag fade-in">Tech Stack</div>
+  <h2 class="section-title fade-in">Tools Used</h2>
+  <div class="pills fade-in">
+    <span class="pill">WordPress</span>
+    <span class="pill">Zoho CRM</span>
+    <span class="pill">Zoho Campaigns</span>
+    <span class="pill">LinkedIn Ads</span>
+    <span class="pill">Rank Math</span>
+    <span class="pill">Calendly</span>
+    <span class="pill">ChatGPT</span>
+    <span class="pill">Perplexity</span>
+    <span class="pill">Google Analytics</span>
+    <span class="pill">Google Search Console</span>
+    <span class="pill">Mangools</span>
+    <span class="pill">Twitter/X</span>
+    <span class="pill">TikTok</span>
+    <span class="pill">OpusClip</span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-name">Patricia González</div>
+    <div class="footer-role">Growth Marketing Leader · LATAM & US</div>
+  </div>
+  <div class="footer-links">
+    <a href="../index.html" class="footer-link">All Projects</a>
+    <a href="https://www.linkedin.com/in/patriciagonzalezpaublini/" target="_blank" class="footer-link">LinkedIn</a>
+    <a href="https://github.com/pattygonza25" target="_blank" class="footer-link">GitHub</a>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
