@@ -13,6 +13,7 @@
     --wine: #8B0000;
     --sand: #C4A882;
     --mid: #6B6B65;
+    --mid-readable: #4a4a44;
     --light: #E8E4DC;
   }
 
@@ -111,7 +112,7 @@
 
   .hero-sub {
     font-size: 1.05rem;
-    color: var(--mid);
+    color: var(--mid-readable);
     max-width: 420px;
     margin-bottom: 3rem;
     line-height: 1.8;
@@ -124,8 +125,6 @@
     border-top: 1px solid var(--light);
     padding-top: 2.5rem;
   }
-
-  .metric-item {}
 
   .metric-value {
     font-family: 'Playfair Display', serif;
@@ -140,7 +139,8 @@
     font-size: 0.72rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--mid);
+    color: var(--mid-readable);
+    line-height: 1.5;
   }
 
   .hero-right {
@@ -230,13 +230,11 @@
 
   .context-text {
     font-size: 1.05rem;
-    color: rgba(247,244,239,0.75);
+    color: rgba(247,244,239,0.85);
     line-height: 1.9;
   }
 
   .context-text p { margin-bottom: 1.5rem; }
-
-  .context-details {}
 
   .detail-block {
     border-top: 1px solid rgba(247,244,239,0.15);
@@ -260,8 +258,6 @@
   }
 
   /* PROBLEM */
-  .problem {}
-
   .problem-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -271,15 +267,13 @@
 
   .problem-text {
     font-size: 1.05rem;
-    color: var(--mid);
+    color: var(--mid-readable);
     line-height: 1.9;
   }
 
   .problem-text p { margin-bottom: 1.5rem; }
 
-  .problem-list {
-    list-style: none;
-  }
+  .problem-list { list-style: none; }
 
   .problem-list li {
     padding: 1.2rem 0;
@@ -293,16 +287,15 @@
   }
 
   .problem-list li::before {
-    content: '—';
+    content: '/';
     color: var(--wine);
+    font-weight: 500;
     flex-shrink: 0;
     margin-top: 0.1rem;
   }
 
   /* SOLUTION */
-  .solution {
-    background: var(--light);
-  }
+  .solution { background: var(--light); }
 
   .solution-grid {
     display: grid;
@@ -334,28 +327,12 @@
 
   .solution-card-text {
     font-size: 0.88rem;
-    color: var(--mid);
+    color: var(--mid-readable);
     line-height: 1.8;
   }
 
   /* IMAGES */
   .images-section { padding: 0; }
-
-  .images-grid {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr;
-    height: 600px;
-  }
-
-  .images-grid img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top;
-    transition: transform 0.6s ease;
-  }
-
-  .images-grid img:hover { transform: scale(1.02); }
 
   .arch-image {
     width: 100%;
@@ -366,15 +343,13 @@
   .images-caption {
     padding: 1.5rem 6rem;
     background: var(--dark);
-    color: rgba(247,244,239,0.5);
+    color: rgba(247,244,239,0.6);
     font-size: 0.78rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
   }
 
   /* ARCHITECTURE */
-  .architecture {}
-
   .arch-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -384,15 +359,13 @@
 
   .arch-text {
     font-size: 1.05rem;
-    color: var(--mid);
+    color: var(--mid-readable);
     line-height: 1.9;
   }
 
   .arch-text p { margin-bottom: 1.5rem; }
 
-  .segments-list {
-    list-style: none;
-  }
+  .segments-list { list-style: none; }
 
   .segment-item {
     display: flex;
@@ -462,7 +435,7 @@
     font-size: 0.78rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: rgba(247,244,239,0.5);
+    color: rgba(247,244,239,0.7);
     line-height: 1.5;
   }
 
@@ -483,7 +456,7 @@
 
   .results-note-text {
     font-size: 0.92rem;
-    color: rgba(247,244,239,0.6);
+    color: rgba(247,244,239,0.75);
     line-height: 1.8;
   }
 
@@ -507,8 +480,6 @@
   }
 
   /* LEARNINGS */
-  .learnings {}
-
   .learnings-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -534,7 +505,7 @@
 
   .learning-text {
     font-size: 0.9rem;
-    color: var(--mid);
+    color: var(--mid-readable);
     line-height: 1.8;
   }
 
@@ -548,8 +519,6 @@
     align-items: center;
   }
 
-  .footer-left {}
-
   .footer-name {
     font-family: 'Playfair Display', serif;
     font-size: 1.5rem;
@@ -558,7 +527,7 @@
 
   .footer-role {
     font-size: 0.85rem;
-    color: rgba(247,244,239,0.5);
+    color: rgba(247,244,239,0.6);
     letter-spacing: 0.06em;
     text-transform: uppercase;
   }
@@ -570,7 +539,7 @@
   }
 
   .footer-link {
-    color: rgba(247,244,239,0.6);
+    color: rgba(247,244,239,0.7);
     text-decoration: none;
     font-size: 0.85rem;
     letter-spacing: 0.06em;
@@ -601,11 +570,16 @@
     .context-grid, .problem-grid, .arch-grid, .results-note { grid-template-columns: 1fr; gap: 3rem; }
     .solution-grid { grid-template-columns: 1fr; }
     .results-grid { grid-template-columns: 1fr 1fr; }
-    .images-grid { grid-template-columns: 1fr; height: auto; }
-    .images-grid img { height: 300px; }
     footer { flex-direction: column; gap: 2rem; text-align: center; }
     nav { padding: 1rem 1.5rem; }
     .learnings-grid { grid-template-columns: 1fr; }
+    .images-caption { padding: 1.2rem 2rem; }
+  }
+
+  @media (max-width: 640px) {
+    .hero-metrics { grid-template-columns: 1fr; gap: 1.2rem; }
+    .results-grid { grid-template-columns: 1fr 1fr; }
+    .solution-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -638,7 +612,10 @@
     </div>
   </div>
   <div class="hero-right">
-    <img src="https://bdoors.us/wp-content/uploads/2026/03/Bdoors-Home.png" alt="Bdoors Homepage">
+    <img
+      src="https://raw.githubusercontent.com/pattygonza25/portfolio/main/bdoors/bdoors%20european%20doors%20blog.001.jpeg"
+      alt="Bdoors European Interior Doors"
+    />
     <div class="hero-overlay">
       <div class="hero-overlay-label">Client</div>
       <div class="hero-overlay-text">Bdoors.us — European Interior Doors, South Florida</div>
@@ -658,14 +635,14 @@
         <p>My mandate was to build the full digital growth system — and have it ready to support Google Ads campaigns before a single dollar of paid media was spent.</p>
       </div>
     </div>
-    <div class="context-details">
+    <div>
       <div class="detail-block">
         <div class="detail-label">Industry</div>
         <div class="detail-value">B2B · Interior Architecture · Construction</div>
       </div>
       <div class="detail-block">
         <div class="detail-label">Market</div>
-        <div class="detail-value">South Florida — Miami-Dade & Broward County</div>
+        <div class="detail-value">South Florida — Miami-Dade &amp; Broward County</div>
       </div>
       <div class="detail-block">
         <div class="detail-label">Target Segments</div>
@@ -677,7 +654,7 @@
       </div>
       <div class="detail-block">
         <div class="detail-label">Role</div>
-        <div class="detail-value">Solo — Strategy, Design, Build & Launch</div>
+        <div class="detail-value">Solo — Strategy, Design, Build &amp; Launch</div>
       </div>
     </div>
   </div>
@@ -710,7 +687,7 @@
   <div class="solution-grid fade-in">
     <div class="solution-card">
       <div class="solution-number">01</div>
-      <div class="solution-card-title">Website Redesign & Visual System</div>
+      <div class="solution-card-title">Website Redesign &amp; Visual System</div>
       <div class="solution-card-text">Rebuilt on WordPress + Elementor with a consistent design system: Raleway 300/400, brand palette, and standardized structure across all 19 pages. Every section communicates premium positioning.</div>
     </div>
     <div class="solution-card">
@@ -720,7 +697,7 @@
     </div>
     <div class="solution-card">
       <div class="solution-number">03</div>
-      <div class="solution-card-title">Product Pages & Industry Guides</div>
+      <div class="solution-card-title">Product Pages &amp; Industry Guides</div>
       <div class="solution-card-text">One page per collection with targeted local keywords. Seven technical blog articles targeting long-tail B2B keywords — published before Google Ads launch to build topical authority first.</div>
     </div>
     <div class="solution-card">
@@ -735,15 +712,19 @@
     </div>
     <div class="solution-card">
       <div class="solution-number">06</div>
-      <div class="solution-card-title">Security & Anti-Spam</div>
+      <div class="solution-card-title">Security &amp; Anti-Spam</div>
       <div class="solution-card-text">Cloudflare Turnstile configured on all forms. Automatic confirmation emails to leads with catalogue CTA. Internal sales notifications with segment data. Every submission handled cleanly and professionally.</div>
     </div>
   </div>
 </section>
 
-<!-- IMAGES -->
+<!-- IMAGE BREAK -->
 <div class="images-section">
-  <img class="arch-image" src="https://bdoors.us/wp-content/uploads/2026/03/Bdoors-Home-1.png" alt="Bdoors Interior Doors">
+  <img
+    class="arch-image"
+    src="https://raw.githubusercontent.com/pattygonza25/portfolio/main/bdoors/bdoors%20european%20doors%20blog.004.jpeg"
+    alt="Bdoors European Interior Doors — Product Range"
+  />
   <div class="images-caption">Product pages — Lacquered · Wood Veneer · Laminated — each with targeted local SEO keywords</div>
 </div>
 
@@ -872,7 +853,7 @@
 <footer>
   <div class="footer-left">
     <div class="footer-name">Patricia González</div>
-    <div class="footer-role">Growth Marketing Leader · LATAM & US</div>
+    <div class="footer-role">Growth Marketing Leader · LATAM &amp; US</div>
   </div>
   <div class="footer-links">
     <a href="../index.html" class="footer-link">All Projects</a>
@@ -884,9 +865,7 @@
 <script>
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
+      if (entry.isIntersecting) entry.target.classList.add('visible');
     });
   }, { threshold: 0.1 });
 
