@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MiningStore — Case Study | Patricia González</title>
+<title>MiningStore | Patricia González</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -31,7 +31,6 @@
     overflow-x: hidden;
   }
 
-  /* NAV */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -64,7 +63,6 @@
 
   .nav-back:hover { color: var(--gold); }
 
-  /* HERO */
   .hero {
     min-height: 100vh;
     display: flex;
@@ -78,7 +76,7 @@
   .hero-bg {
     position: absolute;
     inset: 0;
-    background-image: url('https://miningstore.com/wp-content/uploads/2025/07/Miningstore-Iowa-Hydro-Mining-Facility.webp');
+    background-image: url('https://raw.githubusercontent.com/pattygonza25/portfolio/main/miningstore/Facility%2010%20banner.005.jpeg');
     background-size: cover;
     background-position: center;
     filter: brightness(0.25);
@@ -113,10 +111,7 @@
     gap: 1rem;
   }
 
-  .hero-tag::before {
-    content: '▸';
-    font-size: 0.6rem;
-  }
+  .hero-tag::before { content: '▸'; font-size: 0.6rem; }
 
   .hero-title {
     font-family: 'Syne', sans-serif;
@@ -145,10 +140,7 @@
     line-height: 1.8;
   }
 
-  .hero-metrics {
-    display: flex;
-    gap: 3rem;
-  }
+  .hero-metrics { display: flex; gap: 3rem; }
 
   .metric-item { text-align: right; }
 
@@ -169,7 +161,6 @@
     color: var(--mid);
   }
 
-  /* SECTION BASE */
   section { padding: 6rem; }
 
   .section-tag {
@@ -195,7 +186,6 @@
     letter-spacing: -0.01em;
   }
 
-  /* CONTEXT */
   .context {
     background: var(--dark);
     border-top: 1px solid var(--border);
@@ -216,8 +206,6 @@
   }
 
   .context-text p { margin-bottom: 1.5rem; }
-
-  .context-cards {}
 
   .ctx-card {
     border: 1px solid var(--border);
@@ -246,9 +234,6 @@
     color: var(--white);
     line-height: 1.6;
   }
-
-  /* PROBLEM */
-  .problem {}
 
   .problem-grid {
     display: grid;
@@ -279,14 +264,13 @@
   }
 
   .problem-list li::before {
-    content: '×';
+    content: 'x';
     color: var(--gold);
     font-family: 'Syne', sans-serif;
     font-size: 1rem;
     flex-shrink: 0;
   }
 
-  /* STRATEGY */
   .strategy {
     background: var(--dark);
     border-top: 1px solid var(--border);
@@ -334,9 +318,6 @@
     color: var(--mid);
     line-height: 1.8;
   }
-
-  /* NURTURE */
-  .nurture {}
 
   .nurture-intro {
     font-size: 1rem;
@@ -401,7 +382,6 @@
     line-height: 1.8;
   }
 
-  /* IMAGE BREAK */
   .image-break {
     padding: 0;
     position: relative;
@@ -441,7 +421,6 @@
     line-height: 1.2;
   }
 
-  /* SEGMENTS */
   .segments {
     background: var(--dark);
     border-top: 1px solid var(--border);
@@ -456,10 +435,7 @@
     margin-bottom: 4rem;
   }
 
-  .segments-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
+  .segments-table { width: 100%; border-collapse: collapse; }
 
   .segments-table th {
     font-family: 'DM Mono', monospace;
@@ -490,9 +466,6 @@
     font-weight: 600;
     color: var(--white);
   }
-
-  /* GEO */
-  .geo {}
 
   .geo-grid {
     display: grid;
@@ -539,7 +512,6 @@
     line-height: 1.7;
   }
 
-  /* RESULTS */
   .results {
     background: var(--dark);
     border-top: 1px solid var(--border);
@@ -599,9 +571,6 @@
     line-height: 1.8;
   }
 
-  /* LEARNINGS */
-  .learnings {}
-
   .learnings-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -637,18 +606,13 @@
     line-height: 1.8;
   }
 
-  /* STACK */
   .stack {
     background: var(--dark);
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
   }
 
-  .pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-  }
+  .pills { display: flex; flex-wrap: wrap; gap: 0.6rem; }
 
   .pill {
     font-family: 'DM Mono', monospace;
@@ -661,12 +625,8 @@
     transition: border-color 0.2s, color 0.2s;
   }
 
-  .pill:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-  }
+  .pill:hover { border-color: var(--gold); color: var(--gold); }
 
-  /* FOOTER */
   footer {
     background: var(--black);
     border-top: 1px solid var(--border);
@@ -691,10 +651,7 @@
     color: var(--mid);
   }
 
-  .footer-links {
-    display: flex;
-    gap: 2rem;
-  }
+  .footer-links { display: flex; gap: 2rem; }
 
   .footer-link {
     font-family: 'DM Mono', monospace;
@@ -708,19 +665,14 @@
 
   .footer-link:hover { color: var(--gold); }
 
-  /* ANIMATIONS */
   .fade-in {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.6s ease, transform 0.6s ease;
   }
 
-  .fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-  /* RESPONSIVE */
   @media (max-width: 1024px) {
     section { padding: 4rem 2rem; }
     nav { padding: 1rem 1.5rem; }
@@ -735,6 +687,13 @@
     .image-break-text { left: 2rem; right: 2rem; }
     .segments-table { font-size: 0.8rem; }
   }
+
+  @media (max-width: 640px) {
+    .hero-metrics { flex-direction: column; gap: 1.5rem; }
+    .metric-item { text-align: left; }
+    .results-grid { grid-template-columns: 1fr 1fr; }
+    .image-break { height: 300px; }
+  }
 </style>
 </head>
 <body>
@@ -744,7 +703,6 @@
   <a href="../index.html" class="nav-back">← All Projects</a>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid-overlay"></div>
@@ -752,10 +710,10 @@
     <div class="hero-tag">Case Study · B2B Growth · Crypto</div>
     <h1 class="hero-title">Repositioning Bitcoin Mining<br>for <span class="accent">Institutional Investors</span></h1>
     <div class="hero-bottom">
-      <p class="hero-sub">Complete ICP repositioning, full-funnel rebuild, and pioneering GEO strategy — turning a crypto enthusiast brand into an institutional investor platform over 12 months.</p>
+      <p class="hero-sub">Complete ICP repositioning, full-funnel rebuild, and pioneering GEO strategy. Turning a crypto enthusiast brand into an institutional investor platform over 12 months.</p>
       <div class="hero-metrics">
         <div class="metric-item">
-          <div class="metric-value">3.4×</div>
+          <div class="metric-value">3.4x</div>
           <div class="metric-label">Qualified Calls</div>
         </div>
         <div class="metric-item">
@@ -763,7 +721,7 @@
           <div class="metric-label">Email Open Rate</div>
         </div>
         <div class="metric-item">
-          <div class="metric-value">10×</div>
+          <div class="metric-value">+10x</div>
           <div class="metric-label">LinkedIn Organic</div>
         </div>
       </div>
@@ -771,7 +729,6 @@
   </div>
 </div>
 
-<!-- CONTEXT -->
 <section class="context">
   <div class="context-grid fade-in">
     <div>
@@ -783,14 +740,14 @@
         <p>Meanwhile, a new buyer was emerging: high-net-worth individuals, family offices, and private equity firms looking for asset-backed Bitcoin exposure with tax advantages. No one was speaking their language.</p>
       </div>
     </div>
-    <div class="context-cards">
+    <div>
       <div class="ctx-card">
         <div class="ctx-card-label">Client</div>
         <div class="ctx-card-value">MiningStore — U.S. Bitcoin Mining ($15M+ Revenue)</div>
       </div>
       <div class="ctx-card">
         <div class="ctx-card-label">Market</div>
-        <div class="ctx-card-value">United States — Institutional & HNWI Investors</div>
+        <div class="ctx-card-value">United States — Institutional &amp; HNWI Investors</div>
       </div>
       <div class="ctx-card">
         <div class="ctx-card-label">Duration</div>
@@ -798,7 +755,7 @@
       </div>
       <div class="ctx-card">
         <div class="ctx-card-label">Role</div>
-        <div class="ctx-card-value">Solo Growth Marketing — Strategy & Full Execution</div>
+        <div class="ctx-card-value">Solo Growth Marketing — Strategy &amp; Full Execution</div>
       </div>
       <div class="ctx-card">
         <div class="ctx-card-label">Channels</div>
@@ -808,60 +765,59 @@
   </div>
 </section>
 
-<!-- PROBLEM -->
 <section class="problem">
   <div class="section-tag fade-in">The Problem</div>
   <h2 class="section-title fade-in">Six Gaps in the Growth Engine</h2>
   <div class="problem-grid fade-in">
     <div class="problem-text">
-      <p>The audit revealed a site optimized for the wrong person. Technical jargon, retail-focused CTAs, and content that assumed crypto literacy — none of which resonated with a family office evaluating portfolio diversification or a tax consultant researching bonus depreciation.</p>
+      <p>The audit revealed a site optimized for the wrong person. Technical jargon, retail-focused CTAs, and content that assumed crypto literacy. None of which resonated with a family office evaluating portfolio diversification or a tax consultant researching bonus depreciation.</p>
       <p>There was no lead nurturing, no segmentation, and no system to move a prospect from first touch to booked call. Every lead went cold between discovery and sale.</p>
     </div>
     <ul class="problem-list">
       <li>Messaging built for crypto enthusiasts, not institutional investors</li>
-      <li>Core retail audience saturating — lower conversion potential</li>
-      <li>No lead nurturing — prospects went cold between touch and call</li>
-      <li>No ICP segmentation — one message for all audiences</li>
-      <li>LinkedIn inconsistent — no content calendar, no paid strategy</li>
-      <li>Zero GEO presence — no LLM-driven traffic at all</li>
+      <li>Core retail audience saturating, lower conversion potential</li>
+      <li>No lead nurturing, prospects went cold between touch and call</li>
+      <li>No ICP segmentation, one message for all audiences</li>
+      <li>LinkedIn inconsistent, no content calendar, no paid strategy</li>
+      <li>Zero GEO presence, no LLM-driven traffic at all</li>
     </ul>
   </div>
 </section>
 
-<!-- STRATEGY -->
 <section class="strategy">
   <div class="section-tag fade-in">The Strategy</div>
   <h2 class="section-title fade-in">Reposition. Rebuild. Capture.</h2>
   <p class="strategy-intro fade-in">Three strategic priorities drove everything: reposition the brand for institutional audiences, rebuild the full-funnel infrastructure, and capture a new traffic channel before competitors discovered it.</p>
   <div class="strategy-blocks fade-in">
     <div class="strategy-block">
-      <div class="block-num">01 — REPOSITION</div>
+      <div class="block-num">01 / REPOSITION</div>
       <div class="block-title">Investor Language Over Crypto Language</div>
       <div class="block-text">Every piece of content was rewritten to speak ROI, yield, diversification, and tax efficiency. Not hashrate, block rewards, or mining difficulty. The audience was financial, not technical. We rebuilt the website, blog, and all messaging around five distinct investor segments.</div>
     </div>
     <div class="strategy-block">
-      <div class="block-num">02 — REBUILD</div>
+      <div class="block-num">02 / REBUILD</div>
       <div class="block-title">Full-Funnel Infrastructure From Zero</div>
       <div class="block-text">Complete SEO architecture rebuild. Three-layer lifecycle email system in Zoho Campaigns. Lead magnets per segment with dedicated landing pages. LinkedIn organic calendar plus geo-targeted paid campaigns. Automated lead scraping and enrichment for the sales team.</div>
     </div>
     <div class="strategy-block">
-      <div class="block-num">03 — CAPTURE</div>
+      <div class="block-num">03 / CAPTURE</div>
       <div class="block-title">Pioneer GEO Before the Competition</div>
-      <div class="block-text">Before GEO was an established term, structured all content to answer the questions HNWIs were asking AI tools. FAQs, detailed guides, investor-specific content — optimized to be cited by ChatGPT, Perplexity, and Google AI Overviews. Zero-competition, high-intent channel.</div>
+      <div class="block-text">Before GEO was an established term, structured all content to answer the questions HNWIs were asking AI tools. FAQs, detailed guides, investor-specific content optimized to be cited by ChatGPT, Perplexity, and Google AI Overviews. Zero-competition, high-intent channel.</div>
     </div>
   </div>
 </section>
 
-<!-- IMAGE BREAK -->
 <div class="image-break">
-  <img src="https://miningstore.com/wp-content/uploads/2025/07/Miningstore-Iowa-Mining-Facility-1-1024x512.webp" alt="MiningStore Iowa Facility">
+  <img
+    src="https://raw.githubusercontent.com/pattygonza25/portfolio/main/miningstore/Facility%208%20MiningStore.004.jpeg"
+    alt="MiningStore Iowa Facility"
+  />
   <div class="image-break-text">
     <div class="image-break-label">Infrastructure</div>
     <div class="image-break-title">Institutional-grade Bitcoin mining. The marketing finally matched the product.</div>
   </div>
 </div>
 
-<!-- NURTURE -->
 <section class="nurture">
   <div class="section-tag fade-in">Email Architecture</div>
   <h2 class="section-title fade-in">Three Layers. One System.<br>Right Message at Every Stage.</h2>
@@ -871,13 +827,13 @@
       <div class="layer-num">Layer 01</div>
       <div class="layer-title">Intent-Triggered Nurture</div>
       <div class="layer-trigger">Trigger: Book a Call Click</div>
-      <div class="layer-text">Activated automatically when a prospect clicked "Book a Call" anywhere on the site. Educational sequence delivered before the sales call — reducing friction and improving call quality. Prospects arrived informed and pre-qualified.</div>
+      <div class="layer-text">Activated automatically when a prospect clicked "Book a Call" anywhere on the site. Educational sequence delivered before the sales call, reducing friction and improving call quality. Prospects arrived informed and pre-qualified.</div>
     </div>
     <div class="layer-card">
       <div class="layer-num">Layer 02</div>
       <div class="layer-title">Post-Call Segmented Nurture</div>
       <div class="layer-trigger">Trigger: Sales Rep CRM Tag</div>
-      <div class="layer-text">Activated by the sales rep after tagging each lead by segment in Zoho CRM. Different sequences for family offices vs tax consultants vs real estate investors — each addressing their specific objections and motivations.</div>
+      <div class="layer-text">Activated by the sales rep after tagging each lead by segment in Zoho CRM. Different sequences for family offices vs tax consultants vs real estate investors, each addressing their specific objections and motivations.</div>
     </div>
     <div class="layer-card">
       <div class="layer-num">Layer 03</div>
@@ -888,7 +844,6 @@
   </div>
 </section>
 
-<!-- SEGMENTS -->
 <section class="segments">
   <div class="section-tag fade-in">ICP Segmentation</div>
   <h2 class="section-title fade-in">Five Segments. Five Strategies.</h2>
@@ -906,7 +861,7 @@
       <tr>
         <td><span class="seg-name">Venture Capital</span></td>
         <td>Portfolio diversification</td>
-        <td>Liquidity & exit timeline</td>
+        <td>Liquidity &amp; exit timeline</td>
         <td>ROI models, exit scenarios</td>
       </tr>
       <tr>
@@ -918,7 +873,7 @@
       <tr>
         <td><span class="seg-name">Real Estate Investors</span></td>
         <td>Yield comparison</td>
-        <td>Energy costs & ROI</td>
+        <td>Energy costs &amp; ROI</td>
         <td>Cap rate comparison, yield analysis</td>
       </tr>
       <tr>
@@ -937,13 +892,12 @@
   </table>
 </section>
 
-<!-- GEO -->
 <section class="geo">
-  <div class="section-tag fade-in">GEO — Generative Engine Optimization</div>
+  <div class="section-tag fade-in">GEO: Generative Engine Optimization</div>
   <h2 class="section-title fade-in">A New Channel Before<br>Anyone Had a Name for It</h2>
   <div class="geo-grid fade-in">
     <div class="geo-text">
-      <p>While reviewing analytics, a new traffic source appeared: ChatGPT. Small in volume, but the quality was unlike anything else — institutional investors, family offices, tax consultants. The highest-intent visitors we'd seen.</p>
+      <p>While reviewing analytics, a new traffic source appeared: ChatGPT. Small in volume, but the quality was unlike anything else. Institutional investors, family offices, tax consultants. The highest-intent visitors we'd seen.</p>
       <p>The insight: LLMs cite content that answers specific questions, not content that ranks for keywords. So every blog post was restructured around the exact questions a HNWI investor would ask an AI tool. FAQs integrated into every page. Investor-specific guides built to be cited, not just read.</p>
       <p>One lead told the sales team: "When I searched in Grok, MiningStore kept coming up. I checked the website and LinkedIn — the presence looked solid, so I booked a call."</p>
       <p>That lead didn't come from an ad or SEO. It came from an AI referral — a channel with zero competition and maximum intent.</p>
@@ -951,18 +905,17 @@
     <div class="geo-stat">
       <div class="geo-stat-value">2%</div>
       <div class="geo-stat-label">LLM-Driven Traffic</div>
-      <div class="geo-stat-sub">Grew from zero to 2% of total users over 12 months — consistently the highest quality lead channel, with the shortest path to booked calls.</div>
+      <div class="geo-stat-sub">Grew from zero to 2% of total users over 12 months. Consistently the highest quality lead channel, with the shortest path to booked calls.</div>
     </div>
   </div>
 </section>
 
-<!-- RESULTS -->
 <section class="results">
   <div class="section-tag fade-in">Results</div>
   <h2 class="section-title fade-in">12 Months. One Solo Operator.</h2>
   <div class="results-grid fade-in">
     <div class="result-card">
-      <div class="result-value">3.4×</div>
+      <div class="result-value">3.4x</div>
       <div class="result-label">Growth in Qualified<br>Investor Calls</div>
     </div>
     <div class="result-card">
@@ -970,7 +923,7 @@
       <div class="result-label">Email Open Rate<br>Over 12 Months</div>
     </div>
     <div class="result-card">
-      <div class="result-value">~10×</div>
+      <div class="result-value">+10x</div>
       <div class="result-label">LinkedIn Organic<br>Impressions Growth</div>
     </div>
     <div class="result-card">
@@ -985,12 +938,11 @@
     </div>
     <div>
       <div class="note-title">Scope of execution</div>
-      <div class="note-text">All strategy, content, campaigns, SEO architecture, email workflows, lead magnets, CRM configuration, LinkedIn organic and paid, lead scraping automation, and sales enablement — designed and implemented directly as a solo growth engagement. No agency, no team.</div>
+      <div class="note-text">All strategy, content, campaigns, SEO architecture, email workflows, lead magnets, CRM configuration, LinkedIn organic and paid, lead scraping automation, and sales enablement. Designed and implemented directly as a solo growth engagement. No agency, no team.</div>
     </div>
   </div>
 </section>
 
-<!-- LEARNINGS -->
 <section class="learnings">
   <div class="section-tag fade-in">Key Decisions</div>
   <h2 class="section-title fade-in">What Would I Do Differently</h2>
@@ -998,7 +950,7 @@
     <div class="learning">
       <div class="learning-tag">Improvement 01</div>
       <div class="learning-title">Segment from the Landing Page, Not the Sales Call</div>
-      <div class="learning-text">The post-call nurture was triggered by the sales rep tagging the lead in Zoho after the call. More powerful: capture segment signals at the first landing page touch and start personalized nurture immediately — before any human interaction. This is now implemented for other clients using HubSpot.</div>
+      <div class="learning-text">The post-call nurture was triggered by the sales rep tagging the lead in Zoho after the call. More powerful: capture segment signals at the first landing page touch and start personalized nurture immediately, before any human interaction. This is now implemented for other clients using HubSpot.</div>
     </div>
     <div class="learning">
       <div class="learning-tag">Improvement 02</div>
@@ -1008,7 +960,6 @@
   </div>
 </section>
 
-<!-- STACK -->
 <section class="stack">
   <div class="section-tag fade-in">Tech Stack</div>
   <h2 class="section-title fade-in">Tools Used</h2>
@@ -1030,11 +981,10 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div>
     <div class="footer-name">Patricia González</div>
-    <div class="footer-role">Growth Marketing Leader · LATAM & US</div>
+    <div class="footer-role">Growth Marketing Leader · LATAM &amp; US</div>
   </div>
   <div class="footer-links">
     <a href="../index.html" class="footer-link">All Projects</a>
